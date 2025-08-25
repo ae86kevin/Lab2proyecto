@@ -23,15 +23,14 @@ class Registros:
 
 class ModificacionesProductos:
     def __init__(self,registrosAjustes):
-        self.registrosAjustes = registrosAjustes
+        self.registros = registrosAjustes
 
     def registrarProducto(self):
-
-
         while True:
             id_producto=input("Ingrese el id_producto: ")
             if id_producto == "":
                 print("El id no puedes estar vacio")
+                continue
             if id_producto in self.registros.productos:
                 print("El producto ya existe")
                 continue
@@ -68,7 +67,7 @@ class ModificacionesProductos:
                 continue
 
             nuevoProducto=Producto(id_producto,nombre,precio,id_categoria,stock=stock)
-            self.registros.agregarProducto(nuevoProducto)
+            self.registros.agregarProducto[id_producto]=nuevoProducto
             print("Producto registrado correctamente")
 
 
@@ -82,11 +81,11 @@ class ModificacionesProductos:
 
     def ModificarProducto(self):
         id_producto=input("Ingrese el id_producto: ")
-        if id_producto in self.registros.productos:
-            print("producto no encontrado")
+        if id_producto not in self.registros.productos:
+            print("El producto no existe")
             return
 
-        producto = self.registrosAjustes[id_producto]
+        producto = self.registros.productos[id_producto]
 
         nuevoNombre = input("Ingrese el nombre: ")
         if nuevoNombre == "":
@@ -124,7 +123,28 @@ class ModificacionesProductos:
 
 
 
+def menu_productos():
+    registros = Registros()
+    modificaciones = ModificacionesProductos(registros)
 
+    selecion = ""
+    while selecion != "0":
+        print("\n Menu de Productos")
+        print("1. Registrar Producto")
+        print("2. Elimaar Producto")
+        print("3. Modificar Producto")
+        print("4. Volver al menu")
+        selecion=input()
+
+        match selecion:
+            case "1":
+                modificaciones.registrarProducto()
+            case "2":
+                modificaciones.eliminarProducto()
+            case "3":
+                modificaciones.ModificarProducto()
+            case "0":
+                print("Volver al menu")
 
 
 
