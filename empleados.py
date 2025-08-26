@@ -61,6 +61,55 @@ class AdministracionEmpleados:
             print("El Empleado Registrado exitosamente")
             break
 
+    def modificarEmpleado(self):
+        idEmpleado = int(input("Ingrese el ID de Empleado: "))
+        if idEmpleado in self.diccEmpleados:
+            print("Emplado no encotrado")
+            return
+
+
+        empleado=self.diccEmpleados[idEmpleado]
+
+        nuevoNombre=input("Nombre: ")
+        if nuevoNombre =="":
+            print("El nombre no puedes estar vacio")
+            nuevoNombre=empleado.nombreEmpleado
+
+        nuevaDireccion=input("Direccion del Empleado: ")
+        if nuevaDireccion == "":
+            print("la direccion no puede estasr vacia")
+            nuevaDireccion=empleado.direccionP
+
+        nuevoTelefono=input("ingrese el telefono del Empleado: ")
+        if nuevoTelefono == "":
+            print("El telefono no puedes estar vacio")
+            nuevoTelefono=empleado.telefonoP
+
+        nuevoCorreo=input("ingrese el correo del Empleado: ")
+        if nuevoCorreo == "":
+            print("El correo no puedes estar vacio")
+            nuevoCorreo=empleado.correoP
+
+        nuevoPuesto=input("ingrese el puesto del Empleado: ")
+        if nuevoPuesto =="":
+            print(" no puedes vacio ")
+            nuevoPuesto=empleado.puesto
+
+        empleado.nombreEmpleado=nuevoNombre
+        empleado.direccionP=nuevaDireccion
+        empleado.telefonoP=nuevoTelefono
+        empleado.correoP=nuevoCorreo
+        empleado.puesto=nuevoPuesto
+
+    def darDebaja(self):
+        idEmpleado=int(input("Ingrese el ID de Empleado: "))
+        if idEmpleado in self.diccEmpleados:
+            del self.diccEmpleados[idEmpleado]
+            print("El Empleado Registrado exitosamente")
+        else:
+            print("Emplado no encontraod")
+
+
 
 
 
