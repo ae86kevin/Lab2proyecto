@@ -1,8 +1,5 @@
-
-
-
 class Clientes:
-    def __init__(self,nit,nombre, direccion, telefono,correo)
+    def __init__(self,nit,nombre, direccion, telefono,correo):
         self.nit = nit
         self.nombre = nombre
         self.direccion = direccion
