@@ -17,7 +17,7 @@ class AdministracionEmpleados:
     def registroEmpleados(self):
         while True:
             try:
-                idEmpleado = int(input("Ingrese el ID de Empleado: "))
+                idEmpleado = int(input("\nIngrese el ID de Empleado: "))
                 if idEmpleado == "":
                     print("El ID del empleado esta vacio ")
                     continue
@@ -62,7 +62,7 @@ class AdministracionEmpleados:
             break
 
     def modificarEmpleado(self):
-        idEmpleado = int(input("Ingrese el ID de Empleado: "))
+        idEmpleado = int(input("\nIngrese el ID de Empleado: "))
         if idEmpleado in self.diccEmpleados:
             print("Emplado no encotrado")
             return

@@ -27,7 +27,7 @@ class ModificacionesProductos:
 
     def registrarProducto(self):
         while True:
-            id_producto=input("Ingrese el id_producto: ")
+            id_producto=input("Ingrese el id producto: ")
             if id_producto == "":
                 print("El id no puedes estar vacio")
                 continue
@@ -53,7 +53,7 @@ class ModificacionesProductos:
             while True:
                 try:
                     stock = int(input("Ingrese el stock inicial: "))
-                    if stock == "":
+                    if stock < 0:
                         print("El stock no puedes estar vacio")
                     else:
                         break
@@ -61,14 +61,15 @@ class ModificacionesProductos:
                     print("Solo se permite numeros")
 
 
-            id_categoria = input("Ingrese el id_categoria: ")
+            id_categoria = input("Ingrese el id categoria: ")
             if id_categoria == "":
                 print("El id no puedes estar vacio")
                 continue
 
             nuevoProducto=Producto(id_producto,nombre,precio,id_categoria,stock=stock)
-            self.registros.agregarProducto[id_producto]=nuevoProducto
+            self.registros.productos[id_producto] = nuevoProducto
             print("Producto registrado correctamente")
+            break
 
 
     def eliminarProducto(self):
