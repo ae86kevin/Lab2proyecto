@@ -110,6 +110,33 @@ class AdministracionEmpleados:
             print("Emplado no encontraod")
 
 
+def menuEmpleados():
+    modificacionesEmpelados=AdministracionEmpleados()
+
+    seleccion = ""
+    while seleccion != "0":
+        print("\nMenu Empleados")
+        print("1. Registrar emeplado")
+        print("2. Modificicar informacion")
+        print("3. Dar debaja")
+        print("0. Volver al menu")
+        seleccion=input("seleccione una opcion: ")
+
+        match seleccion:
+            case "1":
+                modificacionesEmpelados.registroEmpleados()
+            case"2":
+                modificacionesEmpelados.modificarEmpleado()
+            case"3":
+                modificacionesEmpelados.darDebaja()
+            case"0":
+                print("Volver al menu")
+
+
+
+
+
+
 
 
 
