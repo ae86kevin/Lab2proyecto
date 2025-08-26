@@ -17,6 +17,8 @@ while seleccion != "0":
 
         case"2":
             empleados.menuEmpleados()
+        case"3"
+
 
 
 
