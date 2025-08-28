@@ -3,32 +3,40 @@ class Categoria:
         self.id_categoria = id_categoria
         self.nombre = nombre
 
-
-
-
-
 class Producto:
     def __init__(self):
-        self.categorias={}
         self.productos={}
+        self.cargarProductos()
+
+    def cargarProductos(self):
+        try:
+            with open ('productos.txt', 'r',encoding='utf-8') as archivo:
+                for linea in archivo:
+                    linea = linea.strip()
+                    if linea:
+                        id_producto,nombre,precio,id_categoria,total_compras,total_ventas,stock = linea.split(":")
+                        self.productos[id_producto]={
+                            "Nombre":nombre,
+                            "precio":float(precio),
+                            "categoria":id_categoria,
+                            "total_compras": int(total_compras),
+                            "total_ventas":int(total_ventas),
+                            "stock":int(stock)
+                        }
+            print("Productos importados desde productos.txt")
+        except FileNotFoundError:
+            print("No existe el archivo productos.txt")
+
+    def guardarProductos(self):
+        with open("productos.txt","w",encoding="utf-8") as archivo:
+            for id_producto, datos in self.productos.items():
+                archivo.write(f"{id_producto}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']}:{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n")
 
 
-    def __init__(self, id_producto, nombre, precio, id_categoria, total_compras=0, total_ventas=0, stock=0):
-        self.id_producto = id_producto
-        self.nombre = nombre
-        self.precio = precio
-        self.id_categoria = id_categoria
-        self.total_compras = total_compras
-        self.total_ventas = total_ventas
-        self.stock = stock
 
 
 
 
-class ModificacionesProductos:
-    def __init__(self,registrosAjustes):
-        self.registros = registrosAjustes
-        self.cargarProducto()
 
 
     def cargarProductos(self):
@@ -37,7 +45,8 @@ class ModificacionesProductos:
                 for linea in archivo:
                     linea = linea.strip()
                     if linea:
-                        id_producto,nombre,precio,id_categoria,
+                        partes=linea.split(",")
+
 
 
 
