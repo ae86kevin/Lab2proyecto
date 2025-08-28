@@ -3,7 +3,16 @@ class Categoria:
         self.id_categoria = id_categoria
         self.nombre = nombre
 
+
+
+
+
 class Producto:
+    def __init__(self):
+        self.categorias={}
+        self.productos={}
+
+
     def __init__(self, id_producto, nombre, precio, id_categoria, total_compras=0, total_ventas=0, stock=0):
         self.id_producto = id_producto
         self.nombre = nombre
@@ -14,16 +23,23 @@ class Producto:
         self.stock = stock
 
 
-class Registros:
-    def __init__(self):
-        self.categorias={}
-        self.productos={}
-
 
 
 class ModificacionesProductos:
     def __init__(self,registrosAjustes):
         self.registros = registrosAjustes
+        self.cargarProducto()
+
+
+    def cargarProductos(self):
+        try:
+            with open("productos.txt","r", encoding="utf-8") as archivo:
+                for linea in archivo:
+                    linea = linea.strip()
+                    if linea:
+                        id_producto,nombre,precio,id_categoria,
+
+
 
     def registrarProducto(self):
         while True:

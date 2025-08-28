@@ -6,9 +6,39 @@ class Clientes:
         self.telefono = telefono
         self.correo = correo
 
+
+
+
+
+
 class registroClientes:
     def __int__(self):
         self.DiccClientes = {}
+        self.cargar_clientes()
+
+    def cargar_clientes(self):
+        try:
+            with open("clientes.txt", "r", encoding="utf-8") as archivo:
+                for linea in archivo:
+                    linea = linea.strip()
+                    if linea:
+                        nit, nombre, direccion, telefono, correo = linea.split(",")
+                        self.DiccClientes[nit]={
+                            "Nombre":nombre,
+                            "Direccion":direccion,
+                            "Telefono":telefono,
+                            "Correo":correo
+                        }
+            print("Clientes impotodos dedsde.txt")
+        except FileNotFoundError:
+            print("no existe el clientes en la base de datos")
+
+    def guardar_clientes(self):
+        with open("clientes.txt", "w", encoding="utf-8") as archivo:
+            for nit,datos in self.DiccClientes.items():
+                archivo.write(f"{nit}:{datos['Nombre']}:{datos['direccion']}:{datos['Telefono']}:{datos['Correo']}\n")
+
+
 
     def registroClientes(self):
         while True:
