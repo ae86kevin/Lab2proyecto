@@ -1,46 +1,19 @@
 class Clientes:
-    def __init__(self,nit,nombre, direccion, telefono,correo):
-        self.nit = nit
-        self.nombre = nombre
-        self.direccion = direccion
-        self.telefono = telefono
-        self.correo = correo
-
-
-
-
-
-
-class registroClientes:
     def __int__(self):
-        self.DiccClientes = {}
-        self.cargar_clientes()
+        self.clientes = {}
+        self.cargarClientes()
 
-    def cargar_clientes(self):
+    def cargarClientes(self):
         try:
-            with open("clientes.txt", "r", encoding="utf-8") as archivo:
-                for linea in archivo:
+            with open("clientes.txt", "r",encoding="utf-8") as archivo:
+                for linea in archivo
                     linea = linea.strip()
                     if linea:
-                        nit, nombre, direccion, telefono, correo = linea.split(",")
-                        self.DiccClientes[nit]={
-                            "Nombre":nombre,
-                            "Direccion":direccion,
-                            "Telefono":telefono,
-                            "Correo":correo
-                        }
-            print("Clientes impotodos dedsde.txt")
-        except FileNotFoundError:
-            print("no existe el clientes en la base de datos")
-
-    def guardar_clientes(self):
-        with open("clientes.txt", "w", encoding="utf-8") as archivo:
-            for nit,datos in self.DiccClientes.items():
-                archivo.write(f"{nit}:{datos['Nombre']}:{datos['direccion']}:{datos['Telefono']}:{datos['Correo']}\n")
+                        nit,nombre,direccion,tele
 
 
 
-    def registroClientes(self):
+   def registroClientes(self):
         while True:
             try:
                 nit = int(input("NIT: "))
@@ -69,11 +42,16 @@ class registroClientes:
         if correo == "":
             print("Correo no puede estar vacio")
 
-        nuevoClientes=Clientes(nit,nombre,direccion,telefono,correo)
-        self.DiccClientes[nit] = nuevoClientes
+
+        self.clienes[nit]={
+            "Nombre":nombre,
+            "Direccion":direccion,
+            "Telefono":telefono,
+            "Correo":correo
+        }
+
+        self.guardar_clientes()
         print("cliente registrado")
-
-
 
 
 

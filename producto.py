@@ -32,69 +32,67 @@ class Producto:
             for id_producto, datos in self.productos.items():
                 archivo.write(f"{id_producto}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']}:{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n")
 
+class  AdministracionProductos:
+    def __init__(self,registos):
+        self.registos=registos
 
-
-
-
-
-
-
-    def cargarProductos(self):
-        try:
-            with open("productos.txt","r", encoding="utf-8") as archivo:
-                for linea in archivo:
-                    linea = linea.strip()
-                    if linea:
-                        partes=linea.split(",")
-
-
-
-
-    def registrarProducto(self):
+    def agregarProducto(self ):
         while True:
-            id_producto=input("Ingrese el id producto: ")
-            if id_producto == "":
-                print("El id no puedes estar vacio")
+            id_produto=input("Ingresa el id_producto: ")
+            if id_produto=="":
+                print("el Id no puede estasr vacio")
                 continue
-            if id_producto in self.registros.productos:
-                print("El producto ya existe")
+            if id_produto in self.registos.produtos:
+                print("El id_producto ya existe")
                 continue
-
-            nombre = input("Ingrese el nombre: ")
-            if nombre =="":
-                print("El nombre no puedes estar vacio")
-
-            while True:
-                try:
-                    precio = float(input("Ingrese el precio Q.: "))
-                    if precio < 0:
-                        print("El precio no puede ser menor a 0: intente de nuevo")
-                    else:
-                        break
-                except ValueError:
-                    print("Solo se permite numeros")
-
-
-            while True:
-                try:
-                    stock = int(input("Ingrese el stock inicial: "))
-                    if stock < 0:
-                        print("El stock no puedes estar vacio")
-                    else:
-                        break
-                except ValueError:
-                    print("Solo se permite numeros")
-
-
-            id_categoria = input("Ingrese el id categoria: ")
-            if id_categoria == "":
-                print("El id no puedes estar vacio")
-                continue
-
-            nuevoProducto=Producto(id_producto,nombre,precio,id_categoria,stock=stock)
-            self.registros.productos[id_producto] = nuevoProducto
-            print("Producto registrado correctamente")
             break
+        while True:
+            nombre=input("Ingresa el nombre: ")
+            if nombre =="":
+                print("El nombre no puede estasr vacio")
+                continue
+            break
+
+        while True:
+            try:
+                precio=float(input("Ingresa el precio: "))
+                if precio < 0:
+                    print("El precio no puede ser mayor que 0")
+                    continue
+                break
+            except ValueError:
+                print("precio invaalido")
+
+        while True:
+            try:
+                stock=int(input("Ingresa el stock: "))
+                if stock < 0:
+                    print("El stock no puede ser mayor que 0")
+                    continue
+                break
+            except ValueError:
+                print("stock invalido")
+
+        while True:
+            id_categoria=input("Ingresa el id_categoria: ")
+            if id_categoria =="":
+                print("El id_categoria no puede estasr vacio")
+                continue
+            break
+
+        self.registos.productos[id_producto] = {
+            "Nombre": nombre,
+            "Precio": precio,
+            "Categoria": id_categoria,
+            "TotalCompras": 0,
+            "TotalVentas": 0,
+            "Stock": stock
+        }
+
+        # Guardar en archivo
+        self.registos.guardarProductos()
+        print("✅ Producto agregado correctamente")
+
 
 
     def eliminarProducto(self):
@@ -150,8 +148,8 @@ class Producto:
 
 
 def menu_productos():
-    registros = Registros()
-    modificaciones = ModificacionesProductos(registros)
+    registros=Producto()
+    modificaciones=AdministracionProductos(registros)
 
     selecion = ""
     while selecion != "0":
@@ -164,13 +162,14 @@ def menu_productos():
 
         match selecion:
             case "1":
-                modificaciones.registrarProducto()
+                modificaciones.agregarProducto()
             case "2":
                 modificaciones.eliminarProducto()
             case "3":
                 modificaciones.ModificarProducto()
             case "0":
-                print("Volver al menu")
+                print("volver al menu")
+
 
 
 
