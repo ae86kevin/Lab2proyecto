@@ -1,5 +1,6 @@
 import producto
 import empleados
+from ventas import ventas
 
 print("Menu principal")
 
@@ -7,6 +8,10 @@ seleccion =""
 while seleccion != "0":
     print("1.Productos")
     print("2.Empleados")
+    print("3.proveedores")
+    print("4 ventas")
+    print("0. salir")
+
     print("0. salir")
     seleccion =input("Selecciona una opcion: ")
 
@@ -17,6 +22,17 @@ while seleccion != "0":
 
         case"2":
             empleados.menuEmpleados()
+
+        case"3":
+            pass
+
+        case"4":
+            ventas.menuventas()
+
+        case "0":
+            print("saliendo del sistema")
+
+
 
 
 
