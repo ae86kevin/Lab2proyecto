@@ -14,8 +14,8 @@ class Producto:
                 for linea in archivo:
                     linea = linea.strip()
                     if linea:
-                        id_producto,nombre,precio,id_categoria,total_compras,total_ventas,stock = linea.split(":")
-                        self.productos[id_producto]={
+                        (id_producto, nombre, precio, id_categoria,total_compras, total_ventas, stock) = linea.split(":")
+                        self.productos[id_producto] = {
                             "Nombre":nombre,
                             "precio":float(precio),
                             "categoria":id_categoria,
@@ -30,10 +30,12 @@ class Producto:
     def guardarProductos(self):
         with open("productos.txt","w",encoding="utf-8") as archivo:
             for id_producto, datos in self.productos.items():
-                archivo.write(f"{id_producto}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']}:{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n")
+                archivo.write(
+                    f"{id_producto}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']}:{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n"
+                )
 
 class  AdministracionProductos:
-    def __init__(self,registos):
+    def __init__(self,registos:Producto):
         self.registos=registos
 
     def agregarProducto(self ):
@@ -46,6 +48,8 @@ class  AdministracionProductos:
                 print("El id_producto ya existe")
                 continue
             break
+
+
         while True:
             nombre=input("Ingresa el nombre: ")
             if nombre =="":
@@ -63,6 +67,7 @@ class  AdministracionProductos:
             except ValueError:
                 print("precio invaalido")
 
+
         while True:
             try:
                 stock=int(input("Ingresa el stock: "))
@@ -73,14 +78,16 @@ class  AdministracionProductos:
             except ValueError:
                 print("stock invalido")
 
+
+
         while True:
-            id_categoria=input("Ingresa el id_categoria: ")
-            if id_categoria =="":
+            id_categoria = input("Ingresa el id_categoria: ")
+            if id_categoria == "":
                 print("El id_categoria no puede estasr vacio")
                 continue
             break
 
-        self.registos.productos[id_producto] = {
+        self.registros.productos[id_producto] = {
             "Nombre": nombre,
             "Precio": precio,
             "Categoria": id_categoria,
@@ -88,10 +95,13 @@ class  AdministracionProductos:
             "TotalVentas": 0,
             "Stock": stock
         }
+        self.registros.guardarProductos()
+        print(" Producto agregado correctamente")
 
-        # Guardar en archivo
-        self.registos.guardarProductos()
-        print("✅ Producto agregado correctamente")
+
+
+
+
 
 
 

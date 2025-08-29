@@ -68,11 +68,9 @@ def registroClientes(self):
             "Correo":correo
         }
 
-        self.guardarClienes()
-        print("cliente registrado..")
-
-
-
+        self.guardarClientes()
+        print("Cliente registrado")
+        return self.clientes[nit]
 
 
 

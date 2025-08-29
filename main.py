@@ -1,6 +1,8 @@
 import producto
 import empleados
-from ventas import ventas
+import producto
+import ventas
+
 
 print("Menu principal")
 

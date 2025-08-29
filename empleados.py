@@ -102,12 +102,18 @@ class AdministracionEmpleados:
         empleado.puesto=nuevoPuesto
 
     def darDebaja(self):
-        idEmpleado=int(input("Ingrese el ID de Empleado: "))
+        try:
+            idEmpleado=int(input("Ingrese el ID de Empleado: "))
+        except ValueError:
+            print("ID invalido")
+            return
+
         if idEmpleado in self.diccEmpleados:
             del self.diccEmpleados[idEmpleado]
-            print("El Empleado Registrado exitosamente")
+            print("Empleado dadode baja")
         else:
-            print("Emplado no encontraod")
+            print("empleado no encontrado")
+
 
 
 def menuEmpleados():

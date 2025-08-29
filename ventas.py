@@ -1,10 +1,64 @@
 import clientes
+import  empleados
+def cargar_productos():
+    productos = {}
+    try:
+        with open("productos.txt", "r", encoding="utf-8") as archivo:
+            for linea in archivo:
+                linea = linea.strip()
+                if linea:
+                    (id_producto, nombre, precio, id_categoria,
+                     total_compras, total_ventas, stock) = linea.split(":")
+                    productos[id_producto] = {
+                        "Nombre": nombre,
+                        "Precio": float(precio),
+                        "Categoria": id_categoria,
+                        "TotalCompras": int(total_compras),
+                        "TotalVentas": int(total_ventas),
+                        "Stock": int(stock)
+                    }
+    except FileNotFoundError:
+        pass
+
+    return productos
+
+
+def guardar_productos(producto):
+    with open("ventas.txt","w", encoding="utf-8") as archivo:
+        for ipd, datos in producto.items():
+            archivo.write(
+                f"{ipd}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']}:"
+                f"{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n"
+            )
+
+
+def cargar_cliente():
+    cliente={}
+    try:
+        with open("ventas.txt","r", encoding="utf-8") as archivo:
+            for linea in archivo:
+                linea = linea.strip()
+                if linea:
+                    nit,nombre,direccion,telefono,correo =linea.strip(":")
+                    clientes[int(nit)]={
+                        "Nombre": nombre,
+                        "Direccion": direccion,
+                        "Telefono": telefono,
+                        "Correo": correo
+                    }
+    except FileNotFoundError:
+        pass
+    return cliente
+
+
+
+
 class ventas:
-    def __init__(self,empleados,clientes,productos):
-        self.empleados = empleados
-        self.clientes = clientes
-        self.productos = productos
-        self.ventasRealizadas =[]
+    def __init__(self):
+        self.empleados={}
+        self.clientes=cargar_cliente()
+        self.productos=cargar_productos()
+        self.ventasRealizadas=[]
 
     def RealizarVentas(self):
 
@@ -13,22 +67,28 @@ class ventas:
             print("El empelado no existe")
             return
 
-        empleado=self.empleados[idEmpleado]
-        print(f"empleado: {empleado.nombreEmpleado}")
 
-        nit =int(input("Ingrese el nit: "))
-        if nit not in self.clientes:
-            print("Clinte no registraod")
-            opcion =input("Quire registar al clietne S/N: ").lower()
-            if opcion == "s":
-                nuevoCliente=clientes.registroClientes()
-                self.clientes[nit]=nuevoCliente
+        nit=input("NIT: ")
+        if nit =="":
+            nit ="CF"
+            if nit not in self.clientes:
+                self.clientes[nit]= {"nombre": "consumidr final"}
+        else:
+            nit=nit
+            if nit not in self.clientes:
+                opcion = input("cliente no registrado. desea registar S/N").lower()
+                if opcion == "s":
+                    nuevo_cliente = clientes.registroClientes()
+                    self.clientes[nit] = nuevo_cliente
+
             else:
-                nit ="CF"
-                if "CF" not in self.clientes:
-                    self.clientes[nit]={"nombre": "consumidor final"}
-        cliente=self.clientes[nit]
-        print(f"cliente: {cliente['nombre']}")
+                nit="CF"
+                if nit not in self.clientes
+                    self.clientes[nit]={"nombre": "consumidr final"}
+
+        cliente =self.clientes[nit]
+        print(f"cliente: {cliente['Nombre']}")
+
 
         id_producto=int(input("Ingrese el ID del producto: "))
         if id_producto not in self.productos:
@@ -52,19 +112,34 @@ class ventas:
 
         producto["Stock"]-=cantidad
         producto["TotalVentas"]+= cantidad
+        guardar_productos(self.productos)
 
         venta = {
-            "Empleado": empleado.nombreEmpleado,
-            "Cliente": cliente["Nombre"],
-            "Producto": producto["Nombre"],
-            "Cantidad": cantidad,
-            "Subtotal": subtotal
+            "Empleado": idEmpleado,
+            "cliente": cliente,
+            "producto": producto,
+            "cantidad": cantidad,
+            "subtotal": subtotal,
+
         }
         self.ventasRealizadas.append(venta)
 
-        print(" Venta registrada ")
-        print(f"Total a pagar: Q.{subtotal:.2f}")
 
+def menuVenas():
+    admintracion_ventas=ventas()
+
+    seleccion=""
+    while seleccion != "0":
+        print("\n Menu ventas")
+        print("1. realizar ventas")
+        print("0. volver")
+        seleccion=input()
+
+        match seleccion:
+            case"1":
+                admintracion_ventas.RealizarVentas()
+            case"0":
+                print("Volver")
 
 
 
