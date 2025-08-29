@@ -2,7 +2,7 @@ import producto
 import empleados
 import producto
 import ventas
-
+from ventas import menuVenas
 
 print("Menu principal")
 
@@ -29,7 +29,7 @@ while seleccion != "0":
             pass
 
         case"4":
-            ventas.menuventas()
+            menuVenas()
 
         case "0":
             print("saliendo del sistema")

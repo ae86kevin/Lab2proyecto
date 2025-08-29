@@ -1,14 +1,15 @@
 import clientes
-import  empleados
+import empleados
+
 def cargar_productos():
     productos = {}
     try:
+
         with open("productos.txt", "r", encoding="utf-8") as archivo:
             for linea in archivo:
                 linea = linea.strip()
                 if linea:
-                    (id_producto, nombre, precio, id_categoria,
-                     total_compras, total_ventas, stock) = linea.split(":")
+                    (id_producto, nombre, precio, id_categoria,total_compras, total_ventas, stock) = linea.split(":")
                     productos[id_producto] = {
                         "Nombre": nombre,
                         "Precio": float(precio),
@@ -73,17 +74,14 @@ class ventas:
             nit ="CF"
             if nit not in self.clientes:
                 self.clientes[nit]= {"nombre": "consumidr final"}
-        else:
-            nit=nit
-            if nit not in self.clientes:
-                opcion = input("cliente no registrado. desea registar S/N").lower()
-                if opcion == "s":
-                    nuevo_cliente = clientes.registroClientes()
-                    self.clientes[nit] = nuevo_cliente
-
+        elif nit not in self.clientes:
+            opcion=input("no registrado, desea registar s/n").lower()
+            if opcion == "s":
+                nuevo_cliente = clientes.registroClientes()
+                self.clientes[nit] = nuevo_cliente
             else:
                 nit="CF"
-                if nit not in self.clientes
+                if nit not in self.clientes:
                     self.clientes[nit]={"nombre": "consumidr final"}
 
         cliente =self.clientes[nit]

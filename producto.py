@@ -87,14 +87,16 @@ class  AdministracionProductos:
                 continue
             break
 
-        self.registros.productos[id_producto] = {
+        self.registros.productos[id_produto] = {
             "Nombre": nombre,
             "Precio": precio,
             "Categoria": id_categoria,
             "TotalCompras": 0,
             "TotalVentas": 0,
             "Stock": stock
+
         }
+
         self.registros.guardarProductos()
         print(" Producto agregado correctamente")
 
