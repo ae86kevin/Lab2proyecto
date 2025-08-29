@@ -69,7 +69,8 @@ def registroClientes(self):
         }
 
         self.guardarClienes()
-        print("cliente registrado")
+        print("cliente registrado..")
+
 
 
 
