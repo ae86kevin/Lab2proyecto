@@ -5,7 +5,7 @@ class Categoria:
 
 class Producto:
     def __init__(self):
-        self.productos={}
+        self.productos = {}
         self.cargarProductos()
 
     def cargarProductos(self):
@@ -40,11 +40,11 @@ class  AdministracionProductos:
 
     def agregarProducto(self ):
         while True:
-            id_produto=input("Ingresa el id_producto: ")
-            if id_produto=="":
+            id_productos=input("Ingresa el id_producto: ")
+            if id_productos=="":
                 print("el Id no puede estasr vacio")
                 continue
-            if id_produto in self.registos.produtos:
+            if id_productos in self.registos.productos:
                 print("El id_producto ya existe")
                 continue
             break
@@ -87,7 +87,7 @@ class  AdministracionProductos:
                 continue
             break
 
-        self.registros.productos[id_produto] = {
+        self.registros.productos[id_productos] = {
             "Nombre": nombre,
             "Precio": precio,
             "Categoria": id_categoria,

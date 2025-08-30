@@ -2,7 +2,7 @@ import producto
 import empleados
 import producto
 import ventas
-from ventas import menuVenas
+
 
 print("Menu principal")
 
