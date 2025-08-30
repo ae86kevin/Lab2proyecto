@@ -8,6 +8,7 @@ class Producto:
         self.productos = {}
         self.cargarProductos()
 
+
     def cargarProductos(self):
         try:
             with open ('productos.txt', 'r',encoding='utf-8') as archivo:
@@ -34,9 +35,17 @@ class Producto:
                     f"{id_producto}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']}:{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n"
                 )
 
+
+
+
+
+
+
+
+
 class  AdministracionProductos:
-    def __init__(self,registos:Producto):
-        self.registos=registos
+    def __init__(self,registros:Producto):
+        self.registros=registros
 
     def agregarProducto(self ):
         while True:
@@ -44,7 +53,7 @@ class  AdministracionProductos:
             if id_productos=="":
                 print("el Id no puede estasr vacio")
                 continue
-            if id_productos in self.registos.productos:
+            if id_productos in self.registros.productos:
                 print("El id_producto ya existe")
                 continue
             break
@@ -107,6 +116,8 @@ class  AdministracionProductos:
 
 
 
+
+
     def eliminarProducto(self):
         id_producto=input("Ingrese el id_producto: ")
         if id_producto in self.registros.productos:
@@ -129,9 +140,11 @@ class  AdministracionProductos:
             nuevoNombre = producto.nombre
 
 
+
+
         while True:
             try:
-                nuevoPrecio = float(input("Ingrese el precio Q.: "))
+                nuevoPrecio = float(input("Ingrese el precio Q. "))
                 if nuevoPrecio=="":
                     print("El precio no puedes estar vacio")
                 else:
@@ -139,6 +152,8 @@ class  AdministracionProductos:
                     break
             except ValueError:
                 print("Solo se permite numeros")
+
+
 
 
         while True:
@@ -159,6 +174,12 @@ class  AdministracionProductos:
 
 
 
+
+
+
+
+
+
 def menu_productos():
     registros=Producto()
     modificaciones=AdministracionProductos(registros)
@@ -169,7 +190,7 @@ def menu_productos():
         print("1. Registrar Producto")
         print("2. Elimaar Producto")
         print("3. Modificar Producto")
-        print("4. Volver al menu")
+        print("0. Volver al menu")
         selecion=input()
 
         match selecion:

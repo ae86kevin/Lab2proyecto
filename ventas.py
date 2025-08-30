@@ -123,7 +123,13 @@ class ventas:
         self.ventasRealizadas.append(venta)
 
 
-def menuVenas():
+
+
+
+
+
+
+def menuVentas():
     admintracion_ventas=ventas()
 
     seleccion=""

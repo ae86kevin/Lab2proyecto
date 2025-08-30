@@ -29,10 +29,12 @@ while seleccion != "0":
             pass
 
         case"4":
-            menuVenas()
+            ventas.menuVentas()
 
         case "0":
             print("saliendo del sistema")
+
+
 
 
 
