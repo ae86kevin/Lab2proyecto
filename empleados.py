@@ -11,7 +11,7 @@ class Empleados:
         return self.IdEmpleado,self.NombreEmpleado,self.direccion,self.telefono,self.correo,self.puesto
 
 class AdministracionEmpleados:
-    def __int__(self):
+    def __init__(self):
         self.diccEmpleados = {}
 
     def registroEmpleados(self):
@@ -116,32 +116,40 @@ class AdministracionEmpleados:
 
 
 
-def menuEmpleados():
-    modificacionesEmpelados=AdministracionEmpleados()
+    def verEmpleados(self):
+        if not self.diccEmpleados:
+            print("No hay empleados registrados.")
+            return
 
+        print("\nListado de Empleados:")
+        for idEmpleado, empleado in self.diccEmpleados.items():
+            print(f"ID: {idEmpleado}  Nombre: {empleado.nombreEmpleado}  "
+                  f"Dirección: {empleado.direccion}  Teléfono: {empleado.telefono}  "
+                  f"Correo: {empleado.correo}  Puesto: {empleado.puesto}")
+
+def menuEmpleados(adminEmpleados):
     seleccion = ""
     while seleccion != "0":
         print("\nMenu Empleados")
-        print("1. Registrar emeplado")
-        print("2. Modificicar informacion")
-        print("3. Dar debaja")
-        print("0. Volver al menu")
-        seleccion=input("seleccione una opcion: ")
+        print("1. Registrar empleado")
+        print("2. Modificar información")
+        print("3. Dar de baja")
+        print("4. ver empleados")
+        print("0. Volver al menú")
+
+        seleccion = input("Seleccione una opción: ")
 
         match seleccion:
             case "1":
-                modificacionesEmpelados.registroEmpleados()
-            case"2":
-                modificacionesEmpelados.modificarEmpleado()
-            case"3":
-                modificacionesEmpelados.darDebaja()
-            case"0":
-                print("Volver al menu")
-
-
-
-
-
+                adminEmpleados.registroEmpleados()
+            case "2":
+                adminEmpleados.modificarEmpleado()
+            case "3":
+                adminEmpleados.darDebaja()
+            case "4":
+                adminEmpleados.verEmpleados()
+            case "0":
+                print("Volver al menú")
 
 
 

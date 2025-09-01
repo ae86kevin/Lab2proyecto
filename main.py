@@ -3,6 +3,7 @@ import empleados
 import producto
 import ventas
 
+adminEmpleados = empleados.AdministracionEmpleados()
 
 print("Menu principal")
 
@@ -23,13 +24,13 @@ while seleccion != "0":
             producto.menu_productos()
 
         case"2":
-            empleados.menuEmpleados()
+            empleados.menuEmpleados(adminEmpleados)
 
         case"3":
             pass
 
         case"4":
-            ventas.menuVentas()
+            ventas.menuVentas(adminEmpleados)
 
         case "0":
             print("saliendo del sistema")

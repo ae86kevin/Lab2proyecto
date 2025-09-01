@@ -3,42 +3,37 @@ class Categoria:
         self.id_categoria = id_categoria
         self.nombre = nombre
 
+
 class Producto:
     def __init__(self):
         self.productos = {}
         self.cargarProductos()
 
-
     def cargarProductos(self):
         try:
-            with open ('productos.txt', 'r',encoding='utf-8') as archivo:
+            with open('productos.txt', 'r', encoding='utf-8') as archivo:
                 for linea in archivo:
                     linea = linea.strip()
                     if linea:
-                        (id_producto, nombre, precio, id_categoria,total_compras, total_ventas, stock) = linea.split(":")
+                        id_producto, nombre, precio, id_categoria, total_compras, total_ventas, stock = linea.split(":")
                         self.productos[id_producto] = {
-                            "Nombre":nombre,
-                            "precio":float(precio),
-                            "categoria":id_categoria,
-                            "total_compras": int(total_compras),
-                            "total_ventas":int(total_ventas),
-                            "stock":int(stock)
+                            "Nombre": nombre,
+                            "Precio": float(precio),
+                            "Categoria": id_categoria,
+                            "TotalCompras": int(total_compras),
+                            "TotalVentas": int(total_ventas),
+                            "Stock": int(stock)
                         }
             print("Productos importados desde productos.txt")
         except FileNotFoundError:
             print("No existe el archivo productos.txt")
 
     def guardarProductos(self):
-        with open("productos.txt","w",encoding="utf-8") as archivo:
+        with open("productos.txt", "w", encoding="utf-8") as archivo:
             for id_producto, datos in self.productos.items():
                 archivo.write(
                     f"{id_producto}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']}:{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n"
                 )
-
-
-
-
-
 
 
 
@@ -49,7 +44,7 @@ class  AdministracionProductos:
 
     def agregarProducto(self ):
         while True:
-            id_productos=input("Ingresa el id_producto: ")
+            id_productos=input("Ingresa el id producto: ")
             if id_productos=="":
                 print("el Id no puede estasr vacio")
                 continue
@@ -68,7 +63,7 @@ class  AdministracionProductos:
 
         while True:
             try:
-                precio=float(input("Ingresa el precio: "))
+                precio=float(input("Ingresa el precio Q: "))
                 if precio < 0:
                     print("El precio no puede ser mayor que 0")
                     continue
@@ -126,8 +121,10 @@ class  AdministracionProductos:
         else:
             print("El producto no existe")
 
+
+
     def ModificarProducto(self):
-        id_producto=input("Ingrese el id_producto: ")
+        id_producto=input("Ingrese el id producto: ")
         if id_producto not in self.registros.productos:
             print("El producto no existe")
             return
@@ -137,40 +134,34 @@ class  AdministracionProductos:
         nuevoNombre = input("Ingrese el nombre: ")
         if nuevoNombre == "":
             print("El nombre no puedes estar vacio")
-            nuevoNombre = producto.nombre
+            nuevoNombre=producto["Nombre"]
+
+
+
+        while True:
+            entrada=input("Ingrese el precio Q. ")
+            if entrada == "":
+                nuevoPrecio=producto["Precio"]
+                break
+            try:
+                nuevoPrecio=float(entrada)
+                break
+            except ValueError:
+                print("precio invalido")
 
 
 
 
         while True:
+            entrada =input("Ingrese el stock. ")
+            if entrada == "":
+                stockNuevo=producto["Stock"]
+                break
             try:
-                nuevoPrecio = float(input("Ingrese el precio Q. "))
-                if nuevoPrecio=="":
-                    print("El precio no puedes estar vacio")
-                else:
-                    nuevoPrecio=producto.precio
-                    break
+                stockNuevo=int(entrada)
+                break
             except ValueError:
-                print("Solo se permite numeros")
-
-
-
-
-        while True:
-            try:
-                stockActulizado = int(input("Ingrese el stock actulizado: "))
-                if stockActulizado == "":
-                    print("El stock no puedes estar vacio")
-                else:
-                    stockActulizado=producto.stock
-                    break
-            except ValueError:
-                print("Solo se permite numeros")
-
-        producto.nombre = nuevoNombre
-        producto.precio = nuevoPrecio
-        producto.stock = stockActulizado
-        print("Producto modificado correctamente")
+                print("stock invalido")
 
 
 
@@ -178,6 +169,26 @@ class  AdministracionProductos:
 
 
 
+        producto["Nombre"]=nuevoNombre
+        producto["Precio"]=nuevoPrecio
+        producto["Stock"]=stockNuevo
+
+
+        self.registros.guardarProductos()
+        print(" Producto modificado correctamente")
+
+
+
+    def verProductos(self):
+        if not self.registros.productos:
+            print("No hay productos registrados")
+            return
+
+        print("Listado de Productos:")
+        for id_producto, datos in self.registros.productos.items():
+            print(f"ID: {id_producto}  Nombre: {datos['Nombre']}  Precio: Q{datos['Precio']}  "
+                  f"Categoría: {datos['Categoria']}  Compras: {datos['TotalCompras']} "
+                  f"Ventas: {datos['TotalVentas']} Stock: {datos['Stock']}")
 
 
 def menu_productos():
@@ -188,22 +199,23 @@ def menu_productos():
     while selecion != "0":
         print("\n Menu de Productos")
         print("1. Registrar Producto")
-        print("2. Elimaar Producto")
-        print("3. Modificar Producto")
+        print("2. Eliminar Producto")
+        print("3. Modifar Producto")
+        print("4. Ver Productos")
         print("0. Volver al menu")
         selecion=input()
 
         match selecion:
-            case "1":
+            case"1":
                 modificaciones.agregarProducto()
-            case "2":
+            case"2":
                 modificaciones.eliminarProducto()
-            case "3":
+            case"3":
                 modificaciones.ModificarProducto()
-            case "0":
-                print("volver al menu")
-
-
+            case"4":
+                modificaciones.verProductos()
+            case"0":
+                print("Volver al menu")
 
 
 

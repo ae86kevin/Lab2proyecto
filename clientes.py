@@ -70,7 +70,7 @@ def registroClientes(self):
 
         self.guardarClientes()
         print("Cliente registrado")
-        return self.clientes[nit]
+        return self.clientes
 
 
 

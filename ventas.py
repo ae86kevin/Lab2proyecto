@@ -54,73 +54,72 @@ def cargar_cliente():
 
 
 
-class ventas:
-    def __init__(self):
-        self.empleados={}
-        self.clientes=cargar_cliente()
-        self.productos=cargar_productos()
-        self.ventasRealizadas=[]
+class Ventas:
+    def __init__(self, adminEmpleados: empleados.AdministracionEmpleados):
+        self.empleados = adminEmpleados.diccEmpleados
+        self.clientes = cargar_cliente()
+        self.productos = cargar_productos()
+        self.ventasRealizadas = []
 
-    def RealizarVentas(self):
+        while True:
+            try:
+                idEmpleado_input = input("Ingrese el ID del empleado: ")
+                idEmpleado = int(idEmpleado_input)
+                if idEmpleado in self.empleados:
+                    print(f"Empleado: {self.empleados[idEmpleado].nombreEmpleado}")
+                    break
+                print("Empleado no encontrado. Intenta nuevamente.")
+            except ValueError:
+                print("ID inválido. Intenta nuevamente.")
 
-        idEmpleado=input("Ingrese el ID del empelado: ")
-        if idEmpleado in self.empleados:
-            print("El empelado no existe")
-            return
-
-
-        nit=input("NIT: ")
-        if nit =="":
-            nit ="CF"
-            if nit not in self.clientes:
-                self.clientes[nit]= {"nombre": "consumidr final"}
-        elif nit not in self.clientes:
-            opcion=input("no registrado, desea registar s/n").lower()
+        nit = input("NIT del cliente: ").strip()
+        if nit == "":
+            nit = "CF"
+        if nit not in self.clientes and nit != "CF":
+            opcion = input("Cliente no registrado. Desea registrarlo? (s/n): ").lower()
             if opcion == "s":
                 nuevo_cliente = clientes.registroClientes()
                 self.clientes[nit] = nuevo_cliente
             else:
-                nit="CF"
-                if nit not in self.clientes:
-                    self.clientes[nit]={"nombre": "consumidr final"}
+                nit = "CF"
 
-        cliente =self.clientes[nit]
-        print(f"cliente: {cliente['Nombre']}")
+        cliente = self.clientes.get(nit, {"Nombre": "Consumidor Final"})
+        print(f"Cliente seleccionado: {cliente['Nombre']}")
 
-
-        id_producto=int(input("Ingrese el ID del producto: "))
+        id_producto = input("ID del producto: ")
         if id_producto not in self.productos:
-            print("Producto no existe")
+            print("Producto no existe.")
             return
-
-        producto=self.productos[id_producto]
-        print(f"producto: {producto['nombre']}")
-
+        producto = self.productos[id_producto]
+        print(f"Producto: {producto['Nombre']} | Stock disponible: {producto['Stock']}")
 
         try:
-            cantidad=int(input("cantidad vendida: "))
-            if cantidad > producto["stock"]:
-                print("no hay suficiente en stock")
+            cantidad = int(input("Cantidad a vender: "))
+            if cantidad > producto["Stock"]:
+                print("No hay suficiente stock.")
                 return
         except ValueError:
-            print("cantidad invalido")
+            print("Cantidad inválida.")
             return
 
-        subtotal =cantidad*producto["Precio"]
 
-        producto["Stock"]-=cantidad
-        producto["TotalVentas"]+= cantidad
+        subtotal = cantidad * producto["Precio"]
+        producto["Stock"] -= cantidad
+        producto["TotalVentas"] += cantidad
         guardar_productos(self.productos)
 
         venta = {
             "Empleado": idEmpleado,
-            "cliente": cliente,
-            "producto": producto,
-            "cantidad": cantidad,
-            "subtotal": subtotal,
-
+            "Cliente": cliente,
+            "Producto": producto,
+            "Cantidad": cantidad,
+            "Subtotal": subtotal
         }
         self.ventasRealizadas.append(venta)
+        print(f"Venta registrada. Subtotal: Q{subtotal}")
+
+
+        print(f"producto: {producto['nombre']}")
 
 
 
@@ -128,25 +127,20 @@ class ventas:
 
 
 
-
-def menuVentas():
-    admintracion_ventas=ventas()
-
-    seleccion=""
+def menuVentas(adminEmpleados):
+    admin_ventas = Ventas(adminEmpleados)
+    seleccion = ""
     while seleccion != "0":
-        print("\n Menu ventas")
-        print("1. realizar ventas")
-        print("0. volver")
-        seleccion=input()
+        print("\n--- Menu Ventas ---")
+        print("1. Realizar venta")
+        print("0. Volver")
+        seleccion = input("Seleccione opción: ")
 
         match seleccion:
-            case"1":
-                admintracion_ventas.RealizarVentas()
-            case"0":
-                print("Volver")
-
-
-
+            case "1":
+                admin_ventas.realizar_venta()
+            case "0":
+                print("Volviendo al menú principal")
 
 
 
