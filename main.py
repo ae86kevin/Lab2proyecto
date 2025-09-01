@@ -12,10 +12,12 @@ while seleccion != "0":
     print("1.Productos")
     print("2.Empleados")
     print("3.proveedores")
+    
     print("4 ventas")
-    print("0. salir")
 
     print("0. salir")
+
+
     seleccion =input("Selecciona una opcion: ")
 
 

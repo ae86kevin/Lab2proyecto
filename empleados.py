@@ -1,5 +1,7 @@
+import os
+
 class Empleados:
-    def __init__(self,idEmpleado,nombreEmpleado,direccion,telefono,correo,puesto):
+    def __init__(self, idEmpleado, nombreEmpleado, direccion, telefono, correo, puesto):
         self.idEmpleado = idEmpleado
         self.nombreEmpleado = nombreEmpleado
         self.direccion = direccion
@@ -7,114 +9,166 @@ class Empleados:
         self.correo = correo
         self.puesto = puesto
 
-    def mostrarEmpleado(self):
-        return self.IdEmpleado,self.NombreEmpleado,self.direccion,self.telefono,self.correo,self.puesto
+
+
 
 class AdministracionEmpleados:
     def __init__(self):
         self.diccEmpleados = {}
+        self.cargarEmpleados()
+
+
+
+
+
+
+    def cargarEmpleados(self):
+        if not os.path.exists("empleados.txt"):
+            return
+        try:
+            with open("empleados.txt", "r", encoding="utf-8") as archivo:
+                for linea in archivo:
+                    linea = linea.strip()
+                    if linea:
+                        idEmpleado, nombre, direccion, telefono, correo, puesto = linea.split(":")
+                        self.diccEmpleados[int(idEmpleado)] = Empleados(
+                            int(idEmpleado), nombre, direccion, telefono, correo, puesto
+                        )
+        except Exception :
+            print(f"no se encuentra registro ")
+
+
+
+
+
+
+
+    def guardarEmpleados(self):
+        try:
+            with open("empleados.txt", "w", encoding="utf-8") as archivo:
+                for idEmpleado, emp in self.diccEmpleados.items():
+                    archivo.write(f"{idEmpleado}:{emp.nombreEmpleado}:{emp.direccion}:"
+                                  f"{emp.telefono}:{emp.correo}:{emp.puesto}\n")
+        except Exception:
+            print(f"no se encuentra registro ")
+
+
+
+
 
     def registroEmpleados(self):
         while True:
             try:
                 idEmpleado = int(input("\nIngrese el ID de Empleado: "))
-                if idEmpleado == "":
-                    print("El ID del empleado esta vacio ")
-                    continue
                 if idEmpleado in self.diccEmpleados:
                     print("El ID de Empleado ya existe ")
                     continue
             except ValueError:
                 print("ID invalido")
+                continue
 
-
-            nombreEmpleado = input("Ingrese el nombre del Empleado: ")
+            nombreEmpleado = input("ingrese el nombre del Empleado: ")
             if nombreEmpleado == "":
                 print("El nombre del Empleado esta vacio")
                 continue
 
-
-            direccion=input("Ingrese direccion del Empleado: ")
+            direccion = input("ingrese direccion del Empleado: ")
             if direccion == "":
                 print("El direccion del Empleado esta vacio")
                 continue
 
-            telefono=input("Ingrese el telefono del Empleado: ")
+            telefono = input("ingrese el telefono del Empleado: ")
             if telefono == "":
                 print("El telefono del Empleado esta vacio")
                 continue
 
-            correo=input("Ingrese el correo del Empleado: ")
+            correo = input("Ingrese el correo del Empleado: ")
             if correo == "":
                 print("El correo del Empleado esta vacio")
                 continue
 
-
-            puesto=input("Ingrese el puesto del Empleado: ")
+            puesto = input("Ingrese el puesto del Empleado: ")
             if puesto == "":
                 print("El puesto del Empleado esta vacio")
                 continue
 
 
-            nuevoEmpleado =Empleados(idEmpleado,nombreEmpleado,direccion,telefono,correo,puesto)
+
+
+            nuevoEmpleado = Empleados(idEmpleado, nombreEmpleado, direccion, telefono, correo, puesto)
             self.diccEmpleados[idEmpleado] = nuevoEmpleado
+            self.guardarEmpleados()
             print("El Empleado Registrado exitosamente")
             break
 
+
+
+
     def modificarEmpleado(self):
-        idEmpleado = int(input("\nIngrese el ID de Empleado: "))
-        if idEmpleado in self.diccEmpleados:
-            print("Emplado no encotrado")
+        try:
+            idEmpleado = int(input("Ingrese el ID de Empleado: "))
+        except ValueError:
+            print("ID invalido")
+            return
+
+        if idEmpleado not in self.diccEmpleados:
+            print("Empleado no encontrado")
             return
 
 
-        empleado=self.diccEmpleados[idEmpleado]
 
-        nuevoNombre=input("Nombre: ")
-        if nuevoNombre =="":
-            print("El nombre no puedes estar vacio")
-            nuevoNombre=empleado.nombreEmpleado
 
-        nuevaDireccion=input("Direccion del Empleado: ")
+
+        empleado = self.diccEmpleados[idEmpleado]
+
+        nuevoNombre = input("Nombre: ")
+        if nuevoNombre == "":
+            nuevoNombre = empleado.nombreEmpleado
+
+        nuevaDireccion = input("Direccion del Empleado: ")
         if nuevaDireccion == "":
-            print("la direccion no puede estasr vacia")
-            nuevaDireccion=empleado.direccionP
+            nuevaDireccion = empleado.direccion
 
-        nuevoTelefono=input("ingrese el telefono del Empleado: ")
+        nuevoTelefono = input("Ingrese el telefono del Empleado: ")
         if nuevoTelefono == "":
-            print("El telefono no puedes estar vacio")
-            nuevoTelefono=empleado.telefonoP
+            nuevoTelefono = empleado.telefono
 
-        nuevoCorreo=input("ingrese el correo del Empleado: ")
+        nuevoCorreo = input("Ingrese el correo del Empleado: ")
         if nuevoCorreo == "":
-            print("El correo no puedes estar vacio")
-            nuevoCorreo=empleado.correoP
+            nuevoCorreo = empleado.correo
 
-        nuevoPuesto=input("ingrese el puesto del Empleado: ")
-        if nuevoPuesto =="":
-            print(" no puedes vacio ")
-            nuevoPuesto=empleado.puesto
+        nuevoPuesto = input("Ingrese el puesto del Empleado: ")
+        if nuevoPuesto == "":
+            nuevoPuesto = empleado.puesto
 
-        empleado.nombreEmpleado=nuevoNombre
-        empleado.direccionP=nuevaDireccion
-        empleado.telefonoP=nuevoTelefono
-        empleado.correoP=nuevoCorreo
-        empleado.puesto=nuevoPuesto
+
+
+        empleado.nombreEmpleado = nuevoNombre
+        empleado.direccion = nuevaDireccion
+        empleado.telefono = nuevoTelefono
+        empleado.correo = nuevoCorreo
+        empleado.puesto = nuevoPuesto
+        self.guardarEmpleados()
+        print("Empleado modificado correctamente")
+
+
+
+
+
 
     def darDebaja(self):
         try:
-            idEmpleado=int(input("Ingrese el ID de Empleado: "))
+            idEmpleado = int(input("Ingrese el ID de Empleado: "))
         except ValueError:
             print("ID invalido")
             return
 
         if idEmpleado in self.diccEmpleados:
             del self.diccEmpleados[idEmpleado]
-            print("Empleado dadode baja")
+            self.guardarEmpleados()
+            print("Empleado dado de baja")
         else:
-            print("empleado no encontrado")
-
-
+            print("Empleado no encontrado")
 
     def verEmpleados(self):
         if not self.diccEmpleados:
@@ -127,6 +181,10 @@ class AdministracionEmpleados:
                   f"Dirección: {empleado.direccion}  Teléfono: {empleado.telefono}  "
                   f"Correo: {empleado.correo}  Puesto: {empleado.puesto}")
 
+
+
+
+
 def menuEmpleados(adminEmpleados):
     seleccion = ""
     while seleccion != "0":
@@ -134,8 +192,8 @@ def menuEmpleados(adminEmpleados):
         print("1. Registrar empleado")
         print("2. Modificar información")
         print("3. Dar de baja")
-        print("4. ver empleados")
-        print("0. Volver al menú")
+        print("4. Ver empleados")
+        print("0. Volver al menu")
 
         seleccion = input("Seleccione una opción: ")
 
@@ -149,12 +207,4 @@ def menuEmpleados(adminEmpleados):
             case "4":
                 adminEmpleados.verEmpleados()
             case "0":
-                print("Volver al menú")
-
-
-
-
-
-
-
-
+                print("Volver al menu")
