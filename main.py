@@ -1,6 +1,8 @@
+import compras
 import producto
 import empleados
 import producto
+import proveedores
 import ventas
 
 adminEmpleados = empleados.AdministracionEmpleados()
@@ -9,11 +11,11 @@ print("Menu principal")
 
 seleccion =""
 while seleccion != "0":
-    print("1.Productos")
-    print("2.Empleados")
-    print("3.proveedores")
-    
-    print("4 ventas")
+    print("1. Productos")
+    print("2. Empleados")
+    print("3. proveedores")
+    print("4  ventas")
+    print("5. Compas")
 
     print("0. salir")
 
@@ -29,10 +31,12 @@ while seleccion != "0":
             empleados.menuEmpleados(adminEmpleados)
 
         case"3":
-            pass
+            proveedores.menu_proveedores(adminEmpleados)
 
         case"4":
             ventas.menuVentas(adminEmpleados)
+        case"5":
+            compras.menuCompras()
 
         case "0":
             print("saliendo del sistema")
