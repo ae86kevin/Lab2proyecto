@@ -7,7 +7,7 @@ import ventas
 
 adminEmpleados = empleados.AdministracionEmpleados()
 
-print("Menu principal")
+print("\nMenu principal")
 
 seleccion =""
 while seleccion != "0":
@@ -31,7 +31,8 @@ while seleccion != "0":
             empleados.menuEmpleados(adminEmpleados)
 
         case"3":
-            proveedores.menu_proveedores(adminEmpleados)
+
+            proveedores.menuProveedores()
 
         case"4":
             ventas.menuVentas(adminEmpleados)

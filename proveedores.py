@@ -12,7 +12,7 @@ class Proveedor:
 
 class cargarProveedores:
     def __init__(self):
-        self.proveedors = {}
+        self.proveedores = {}
         self.cargarProveedores()
 
     def cargarProveedores(self):
@@ -21,7 +21,7 @@ class cargarProveedores:
                 for linea in archivo:
                     if linea.strip():
                         proveedor = proveedor.from_string(linea)
-                        self.proveedors[proveedor.id_proveedor] = proveedor
+                        self.proveedores[proveedor.id_proveedor] = proveedor
             print("proveedores cargados")
         except FileNotFoundError:
             print("No existe el archivo prveedores.txt")
@@ -72,11 +72,14 @@ class cargarProveedores:
 
         self.proveedores[id_proveedor]={
             "Nombre": nombre,
-            "Direccion"
-
-
+            "Direccion": direccion,
+            "Telefono": telefono,
+            "correo": correo
 
         }
+
+        self.guardar_proveedores()
+        print("proveedores guardados")
 
 
 
@@ -84,7 +87,7 @@ class cargarProveedores:
     def mostrarProveedores(self):
         if self.proveedores:
             print("proveedores registrados")
-            for id_proveedores,datos in self.proveedors.items():
+            for id_proveedores,datos in self.proveedores.items():
                 print(f"\n ID :{ id_proveedores }")
                 for clave,valor in datos.items():
                     print(f"Clave : {clave}")
@@ -92,14 +95,14 @@ class cargarProveedores:
 
     def eliminarProveedor(self, id_proveedor):
         if id_proveedor in self.proveedores:
-            del self.proveedors[id_proveedor]
+            del self.proveedores[id_proveedor]
             self.guardar_proveedores()
             print(f"proveedor eliminardo")
         else:
             print("no hay proveedores registrados")
 
 def menuProveedores():
-    registros = Proveedor()
+    registros = RegistroProveedores()
 
     seleccion =""
     while seleccion != "0":
@@ -108,4 +111,17 @@ def menuProveedores():
         print("2.Eliminar proveedores")
         print("3.Mostrar proveedores")
         print("0.Salir")
+
+        match seleccion:
+            case "1":
+                registros.agregarProveedores()
+            case "2":
+                id_proveedor = input("Ingresa el ID del proveedor: ")
+                registros.eliminarProveedor(id_proveedor)
+            case "3":
+                registros.mostrarProveedor()
+            case "0":
+                print("Saliendo")
+                break
+
 
