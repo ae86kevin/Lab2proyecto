@@ -6,6 +6,7 @@ import proveedores
 import ventas
 
 adminEmpleados = empleados.AdministracionEmpleados()
+adminProveedores = proveedores.RegistroProveedores()
 
 print("\nMenu principal")
 
@@ -16,9 +17,7 @@ while seleccion != "0":
     print("3. proveedores")
     print("4  ventas")
     print("5. Compas")
-
     print("0. salir")
-
 
     seleccion =input("Selecciona una opcion: ")
 
@@ -31,8 +30,7 @@ while seleccion != "0":
             empleados.menuEmpleados(adminEmpleados)
 
         case"3":
-
-            proveedores.menuProveedores()
+            proveedores.menuProveedores(adminProveedores)
 
         case"4":
             ventas.menuVentas(adminEmpleados)

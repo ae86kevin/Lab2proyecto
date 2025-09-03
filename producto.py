@@ -49,7 +49,7 @@ class  AdministracionProductos:
                 print("el Id no puede estasr vacio")
                 continue
             if id_productos in self.registros.productos:
-                print("El id_producto ya existe")
+                print("El id producto ya existe")
                 continue
             break
 
@@ -114,7 +114,8 @@ class  AdministracionProductos:
 
 
     def eliminarProducto(self):
-        id_producto=input("Ingrese el id_producto: ")
+        id_producto=input("Ingrese el id "
+                          "producto: ")
         if id_producto in self.registros.productos:
             del(self.registros.productos[id_producto])
             print("Producto eliminado correctamente")

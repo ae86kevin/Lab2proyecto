@@ -6,11 +6,9 @@ class Proveedor:
         self.telefonoP = telefonoP
         self.correoP = correoP
 
-    def mostrarProveedor(self):
-        print(self.id_proveedor,self.nombreProveedores,self.direccionP,self.telefonoP,self.correoP)
 
 
-class cargarProveedores:
+class RegistroProveedores:
     def __init__(self):
         self.proveedores = {}
         self.cargarProveedores()
@@ -63,12 +61,15 @@ class cargarProveedores:
             if telefono == "":
                 print("el telefono no puede estar vacio")
                 continue
+            break
 
         while True:
             correo=input("Ingresa la correo: ")
             if correo == "":
                 print("correo no puede estar vacion ")
-                break
+                continue
+
+            break
 
         self.proveedores[id_proveedor]={
             "Nombre": nombre,
@@ -101,8 +102,7 @@ class cargarProveedores:
         else:
             print("no hay proveedores registrados")
 
-def menuProveedores():
-    registros = RegistroProveedores()
+def menuProveedores(adminProveedores):
 
     seleccion =""
     while seleccion != "0":
@@ -111,15 +111,16 @@ def menuProveedores():
         print("2.Eliminar proveedores")
         print("3.Mostrar proveedores")
         print("0.Salir")
+        seleccion=input()
 
         match seleccion:
             case "1":
-                registros.agregarProveedores()
+                adminProveedores.agregarProveedor()
             case "2":
                 id_proveedor = input("Ingresa el ID del proveedor: ")
-                registros.eliminarProveedor(id_proveedor)
+                adminProveedores.eliminarProveedor(id_proveedor)
             case "3":
-                registros.mostrarProveedor()
+                adminProveedores.mostrarProveedor()
             case "0":
                 print("Saliendo")
                 break

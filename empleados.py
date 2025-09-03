@@ -195,7 +195,7 @@ def menuEmpleados(adminEmpleados):
         print("4. Ver empleados")
         print("0. Volver al menu")
 
-        seleccion = input("Seleccione una opción: ")
+        seleccion = input("Seleccione una opcion: ")
 
         match seleccion:
             case "1":
