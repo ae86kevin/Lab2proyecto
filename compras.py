@@ -72,3 +72,35 @@ class Compras:
         print(f"Compra registrada: {cantidad} unidades de {producto['Nombre']}")
         print(f"Nuevo stock: {producto['Stock']}")
 
+    def mostarPrducto(self):
+        if  not self.productos:
+            print(" no hay productos")
+            return
+
+        print("\n lista de productos:")
+        for id_producto, datos in self.productos.items():
+            print(f"ID: {id_producto}  Nombre: {datos['Nombre']}  Precio: Q{datos['Precio']} Stock: {datos['Stock']}  Total Compras: {datos['TotalCompras']}  Total Ventas: {datos['TotalVentas']}")
+
+
+
+
+def menuCompras():
+    adminCompras=Compras()
+    seleccion =""
+    while seleccion != "0":
+        print("\n Menu compras")
+        print("1. hacer compras")
+        print("2. Mostar productos")
+        print("0. volver")
+
+        seleccion = input()
+
+        match seleccion:
+            case "1":
+                adminCompras.realizar_compra()
+
+            case "2":
+                adminCompras.mostarPrducto()
+            case "3":
+                print("Volver al menu")
+
