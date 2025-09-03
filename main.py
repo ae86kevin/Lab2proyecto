@@ -12,14 +12,14 @@ print("\nMenu principal")
 
 seleccion =""
 while seleccion != "0":
-    print("1. Productos")
+    print("\n1. Productos")
     print("2. Empleados")
     print("3. proveedores")
     print("4  ventas")
     print("5. Compas")
     print("0. salir")
 
-    seleccion =input("Selecciona una opcion: ")
+    seleccion =input("\nSelecciona una opcion: ")
 
 
     match seleccion:

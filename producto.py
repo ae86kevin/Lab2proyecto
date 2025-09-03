@@ -114,8 +114,7 @@ class  AdministracionProductos:
 
 
     def eliminarProducto(self):
-        id_producto=input("Ingrese el id "
-                          "producto: ")
+        id_producto=input("Ingrese el id producto: ")
         if id_producto in self.registros.productos:
             del(self.registros.productos[id_producto])
             print("Producto eliminado correctamente")
@@ -187,9 +186,7 @@ class  AdministracionProductos:
 
         print("Listado de Productos:")
         for id_producto, datos in self.registros.productos.items():
-            print(f"ID: {id_producto}  Nombre: {datos['Nombre']}  Precio: Q{datos['Precio']}  "
-                  f"Categoría: {datos['Categoria']}  Compras: {datos['TotalCompras']} "
-                  f"Ventas: {datos['TotalVentas']} Stock: {datos['Stock']}")
+            print(f"ID: {id_producto}  Nombre: {datos['Nombre']}  Precio: Q{datos['Precio']} Categoría: {datos['Categoria']}  Compras: {datos['TotalCompras']} Ventas: {datos['TotalVentas']} Stock: {datos['Stock']}")
 
 
 def menu_productos():

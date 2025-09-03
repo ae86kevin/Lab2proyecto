@@ -34,11 +34,11 @@ class RegistroProveedores:
 
     def agregarProveedor(self):
         while True:
-            id_proveedor = input("Ingresa el ID del proveedor: ").strip()
+            id_proveedor = input("Ingresa el ID del proveedor: ")
             if id_proveedor == "":
-                print("El ID no puede estar vacío")
+                print("El ID no puede estar vacio")
             if id_proveedor in self.proveedores:
-                print("El ID ya existe, intenta con otro")
+                print("El ID ya existe")
                 continue
             break
 
@@ -95,12 +95,14 @@ class RegistroProveedores:
 
 
     def eliminarProveedor(self, id_proveedor):
+        id_proveedor = input("Ingresa el ID del proveedor: ")
         if id_proveedor in self.proveedores:
             del self.proveedores[id_proveedor]
             self.guardar_proveedores()
             print(f"proveedor eliminardo")
         else:
             print("no hay proveedores registrados")
+
 
 def menuProveedores(adminProveedores):
 
@@ -117,8 +119,8 @@ def menuProveedores(adminProveedores):
             case "1":
                 adminProveedores.agregarProveedor()
             case "2":
-                id_proveedor = input("Ingresa el ID del proveedor: ")
-                adminProveedores.eliminarProveedor(id_proveedor)
+
+                adminProveedores.eliminarProveedor()
             case "3":
                 adminProveedores.mostrarProveedor()
             case "0":

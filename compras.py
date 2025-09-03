@@ -18,8 +18,8 @@ def cargar_productos():
                         "TotalVentas": int(total_ventas),
                         "Stock": int(stock)
                     }
-    except Exception as e:
-        print(f"Error al cargar productos: {e}")
+    except Exception:
+        print("no existe carpeta de prductos ")
     return productos
 
 def guardar_productos(productos):
@@ -48,7 +48,7 @@ class Compras:
         for id_producto, datos in self.productos.items():
             print(f"ID: {id_producto}  Nombre: {datos['Nombre']}  Precio: Q{datos['Precio']}  Stock: {datos['Stock']}")
 
-        id_producto = input("Ingrese el ID del producto a comprar: ").strip()
+        id_producto = input("Ingrese el ID del producto a comprar: ")
         if id_producto not in self.productos:
             print("Producto no existe.")
             return

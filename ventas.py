@@ -25,8 +25,7 @@ def guardar_productos(productos):
     with open("productos.txt", "w", encoding="utf-8") as archivo:
         for ipd, datos in productos.items():
             archivo.write(
-                f"{ipd}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']}:"
-                f"{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n"
+                f"{ipd}:{datos['Nombre']}:{datos['Precio']}:{datos['Categoria']} :{datos['TotalCompras']}:{datos['TotalVentas']}:{datos['Stock']}\n"
             )
 
 def cargar_clientes():
@@ -61,7 +60,7 @@ class Ventas:
                 idEmpleado = int(input("Ingrese el ID del empleado: "))
                 if idEmpleado in self.empleados:
                     empleado_actual = self.empleados[idEmpleado]
-                    print(f"Empleado: {empleado_actual.nombreEmpleado} | Puesto: {empleado_actual.puesto}")
+                    print(f"***Empleado: {empleado_actual.nombreEmpleado}*** | ***Puesto: {empleado_actual.puesto}***")
                     break
                 print("Empleado no encontrado. Intenta nuevamente.")
             except ValueError:
@@ -89,7 +88,7 @@ class Ventas:
             print("Producto no existe.")
             return
         producto_actual = self.productos[id_producto]
-        print(f"Producto: {producto_actual['Nombre']} | Stock disponible: {producto_actual['Stock']}")
+        print(f"***Producto: {producto_actual['Nombre']}*** |*** Stock disponible: {producto_actual['Stock']}***")
 
 
         try:
@@ -114,7 +113,7 @@ class Ventas:
             "Subtotal": subtotal
         }
         self.ventasRealizadas.append(venta)
-        print(f"Venta registrada. Subtotal: Q{subtotal}")
+        print(f"Venta registrada. total: Q{subtotal}")
 
 
 def menuVentas(adminEmpleados):

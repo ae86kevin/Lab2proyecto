@@ -47,8 +47,7 @@ class AdministracionEmpleados:
         try:
             with open("empleados.txt", "w", encoding="utf-8") as archivo:
                 for idEmpleado, emp in self.diccEmpleados.items():
-                    archivo.write(f"{idEmpleado}:{emp.nombreEmpleado}:{emp.direccion}:"
-                                  f"{emp.telefono}:{emp.correo}:{emp.puesto}\n")
+                    archivo.write(f"{idEmpleado}:{emp.nombreEmpleado}:{emp.direccion}: {emp.telefono}:{emp.correo}:{emp.puesto}\n")
         except Exception:
             print(f"no se encuentra registro ")
 
@@ -177,9 +176,7 @@ class AdministracionEmpleados:
 
         print("\nListado de Empleados:")
         for idEmpleado, empleado in self.diccEmpleados.items():
-            print(f"ID: {idEmpleado}  Nombre: {empleado.nombreEmpleado}  "
-                  f"Dirección: {empleado.direccion}  Teléfono: {empleado.telefono}  "
-                  f"Correo: {empleado.correo}  Puesto: {empleado.puesto}")
+            print(f"ID: {idEmpleado}  Nombre: {empleado.nombreEmpleado} Dirección: {empleado.direccion}  Teléfono: {empleado.telefono}  Correo: {empleado.correo}  Puesto: {empleado.puesto}")
 
 
 
